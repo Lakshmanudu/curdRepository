@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Books {
     @Id
     @Column
-    private int bookid;
+    private Integer bookid;
     @Column
     private String bookname;
     @Column
@@ -49,6 +49,16 @@ public class Books {
     public void setPrice(int price)
     {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Books{" +
+                "bookid=" + bookid +
+                ", bookname='" + bookname + '\'' +
+                ", author='" + author + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
 

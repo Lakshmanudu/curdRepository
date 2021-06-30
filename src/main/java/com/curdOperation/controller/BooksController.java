@@ -1,13 +1,9 @@
 package com.curdOperation.controller;
 import java.util.List;
+
+import com.curdOperation.Exception.BooKException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.curdOperation.model.Books;
 import com.curdOperation.service.BooksService;
 @RestController
@@ -15,7 +11,21 @@ public class BooksController {
     @Autowired
     BooksService booksService;
 
-    //creating a get mapping that retrieves all the books detail from the database
+    @GetMapping("/getPriceAndBook")
+    private List<Books> getPriceAndBookName(@RequestParam("Price") int price,@RequestParam("BookName") String bookName) throws BooKException {
+        return booksService.getPriceAndBookName(price,bookName);
+    }
+
+   @GetMapping("/getPriceLessThan")
+    private List<Books> getPriceLessThan(@RequestParam("Price") int price) throws BooKException {
+        return booksService.getPriceLessThan(price);
+    }
+    @GetMapping("/getPriceLessThanEqual")
+    private List<Books> getPriceLessThanEqual(@RequestParam("Price") int price) throws BooKException {
+        return booksService.getPriceLessThanEqual(price);
+    }
+
+//creating a get mapping that retrieves all the books detail from the database
     @GetMapping("/book")
     private List<Books> getAllBooks() {
         return booksService.getAllBooks();
